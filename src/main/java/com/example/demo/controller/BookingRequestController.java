@@ -14,7 +14,11 @@ import com.example.demo.serv.TrainingServ;
 
 
 
-@CrossOrigin(origins = "https://bweb-nu.vercel.app")
+@CrossOrigin(origins = "https://bweb-nu.vercel.app",
+	    allowedHeaders = "*",
+    methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
+    allowCredentials = "true"
+	    )
 	
 @RequestMapping("/api")
 @RestController
