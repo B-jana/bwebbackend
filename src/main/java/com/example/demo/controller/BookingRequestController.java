@@ -12,6 +12,7 @@ import com.example.demo.entity.TrainingEntity;
 import com.example.demo.serv.BookingRequestServ;
 import com.example.demo.serv.TrainingServ;
 
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @CrossOrigin(origins = "https://bweb-nu.vercel.app",
