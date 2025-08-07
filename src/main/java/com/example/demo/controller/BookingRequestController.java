@@ -14,7 +14,7 @@ import com.example.demo.serv.TrainingServ;
 
 
 
-@CrossOrigin(origins = "http://localhost:3001") 
+@CrossOrigin(origins = "https://bweb-nu.vercel.app") 
 @RequestMapping("/api")
 @RestController
 public class BookingRequestController {
