@@ -1,14 +1,25 @@
-# Use OpenJDK 17 base image
-FROM openjdk:17-jdk-slim
+# Stage 1: Build the jar with Maven
+FROM maven:3.9.0-eclipse-temurin-17 AS builder
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Spring Boot jar file to the image
-COPY target/bweb-0.0.1-SNAPSHOT.jar app.jar
+# Copy pom.xml and source code
+COPY pom.xml .
+COPY src ./src
 
-# Expose port (change if your app uses a different port)
-EXPOSE 8081
+# Build the project and skip tests to speed up
+RUN mvn clean package -DskipTests
 
-# Command to run the app
+# Stage 2: Create the runtime image
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# Copy the jar from the builder stage
+COPY --from=builder /app/target/bweb-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose port if needed (default 8080)
+EXPOSE 8080
+
+# Run the jar file
 ENTRYPOINT ["java", "-jar", "app.jar"]
