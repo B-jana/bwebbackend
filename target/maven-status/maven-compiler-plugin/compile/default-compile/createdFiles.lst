@@ -1,0 +1,8 @@
+com\example\demo\repo\TrainingRepo.class
+com\example\demo\BwebApplication.class
+com\example\demo\serv\BookingRequestServ.class
+com\example\demo\serv\TrainingServ.class
+com\example\demo\repo\BookingRequestRepo.class
+com\example\demo\entity\BookingRequest.class
+com\example\demo\controller\BookingRequestController.class
+com\example\demo\entity\TrainingEntity.class
