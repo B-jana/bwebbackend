@@ -1,5 +1,7 @@
 package com.example.demo.serv;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +18,8 @@ public class BookingRequestServ {
 	public BookingRequest save(BookingRequest booking) {
 		return repo.save(booking);
 	}
+	
+	public List<BookingRequest> getAllBookings() {
+        return repo.findAll();
+    }
 }
