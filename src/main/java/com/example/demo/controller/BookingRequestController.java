@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
-@CrossOrigin(origins = "https://bweb-nu.vercel.app",
+@CrossOrigin(origins = "https://bweb-ten.vercel.app",
 	    allowedHeaders = "*",
     methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
     allowCredentials = "true"
