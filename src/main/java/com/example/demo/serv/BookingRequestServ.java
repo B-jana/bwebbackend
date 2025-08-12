@@ -22,4 +22,8 @@ public class BookingRequestServ {
 	public List<BookingRequest> getAllBookings() {
         return repo.findAll();
     }
+
+	public void deleteBooking(Long id) {
+        repo.deleteById(id);
+    }
 }
