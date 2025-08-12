@@ -41,8 +41,8 @@ public class BookingRequestController {
 	@Autowired
 	private TrainingServ tserv;
 	
-	private static final String ADMIN_USERNAME = "jaan";
-    private static final String ADMIN_PASSWORD = "123";
+	private static final String ADMIN_USERNAME = "uha";
+    private static final String ADMIN_PASSWORD = "uha@9398";
 	
     @PostMapping("/login")
     public ResponseEntity<?> adminLogin(@RequestBody Map<String, String> credentials) {
