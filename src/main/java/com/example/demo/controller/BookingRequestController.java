@@ -17,6 +17,7 @@ import com.example.demo.entity.BookingRequest;
 import com.example.demo.entity.TrainingEntity;
 import com.example.demo.serv.BookingRequestServ;
 import com.example.demo.serv.TrainingServ;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -76,5 +77,17 @@ public class BookingRequestController {
     @GetMapping("/trainings")
     public List<TrainingEntity> getAllTrainings() {
         return tserv.getAllTrainings();
+    }
+
+
+	 @DeleteMapping("/bookings/{id}")
+    public void deleteBooking(@PathVariable Long id) {
+    	serv.deleteBooking(id);
+    }
+    
+    
+    @DeleteMapping("/trainings/{id}")
+    public void deleteTraining(@PathVariable Long id) {
+    	tserv.deleteTraining(id);
     }
 }
