@@ -21,4 +21,8 @@ public class TrainingServ {
 	public List<TrainingEntity> getAllTrainings() {
         return repo.findAll();
     }
+
+	public void deleteTraining(Long id) {
+        repo.deleteById(id);
+    }
 }
