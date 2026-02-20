@@ -1,26 +1,34 @@
 package com.example.demo.controller;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.BookingRequest;
+import com.example.demo.entity.Product;
 import com.example.demo.entity.TrainingEntity;
 import com.example.demo.serv.BookingRequestServ;
+import com.example.demo.serv.ProductService;
 import com.example.demo.serv.TrainingServ;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
@@ -40,6 +48,11 @@ public class BookingRequestController {
 	
 	@Autowired
 	private TrainingServ tserv;
+
+	@Autowired
+    private ProductService service;
+
+	private final String uploadDir = "uploads/";
 	
 	private static final String ADMIN_USERNAME = "uha";
     private static final String ADMIN_PASSWORD = "uha@9398";
@@ -90,5 +103,37 @@ public class BookingRequestController {
     @DeleteMapping("/trainings/{id}")
     public void deleteTraining(@PathVariable Long id) {
     	tserv.deleteTraining(id);
+    }
+
+
+
+	
+    @PostMapping("/add")
+    public ResponseEntity<?> addProduct(
+            @RequestParam("name") String name,
+            @RequestParam("price") Double price,
+            @RequestParam("description") String description,
+            @RequestParam("image") MultipartFile image) {
+
+        try {
+            Product savedProduct = service.addProduct(name, price, description, image);
+            return ResponseEntity.ok(savedProduct);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
+
+   
+    @GetMapping("/getAllProducts")
+    public ResponseEntity<List<Product>> getAllProducts() {
+        return ResponseEntity.ok(service.getAllProducts());
+    }
+
+   
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        service.deleteProduct(id);
+        return ResponseEntity.ok("Product deleted successfully");
+
     }
 }
