@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
 import com.example.demo.entity.BookingRequest;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.TrainingEntity;
