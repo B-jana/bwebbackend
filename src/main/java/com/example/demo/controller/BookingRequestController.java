@@ -55,7 +55,6 @@ public class BookingRequestController {
 	@Autowired
     private ProductService service;
 
-	private final String uploadDir = "uploads/";
 	
 	private static final String ADMIN_USERNAME = "uha";
     private static final String ADMIN_PASSWORD = "uha@9398";
@@ -111,21 +110,20 @@ public class BookingRequestController {
 
 
 	
-    @PostMapping("/add")
-    public ResponseEntity<?> addProduct(
-            @RequestParam("name") String name,
-            @RequestParam("price") Double price,
-            @RequestParam("description") String description,
-            @RequestParam("image") MultipartFile image) {
+   @PostMapping("/add")
+public ResponseEntity<?> addProduct(
+        @RequestParam("name") String name,
+        @RequestParam("price") Double price,
+        @RequestParam("description") String description,
+        @RequestParam("image") MultipartFile image) {
 
-        try {
-            Product savedProduct = service.addProduct(name, price, description, image);
-            return ResponseEntity.ok(savedProduct);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
-        }
+    try {
+        Product savedProduct = service.addProduct(name, price, description, image);
+        return ResponseEntity.ok(savedProduct);
+    } catch (Exception e) {
+        return ResponseEntity.badRequest().body("Error: " + e.getMessage());
     }
-
+}
    
     @GetMapping("/getAllProducts")
     public ResponseEntity<List<Product>> getAllProducts() {
