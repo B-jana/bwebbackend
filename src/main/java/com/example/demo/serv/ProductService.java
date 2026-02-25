@@ -11,35 +11,44 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.entity.Product;
 import com.example.demo.repo.ProductRepository;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import java.util.Map;
+
 
 @Service
 public class  ProductService {
 
-    private static final String UPLOAD_DIR = "uploads/";
+    
 
     @Autowired
     private ProductRepository repo;
 
+    @Autowired
+private Cloudinary cloudinary;
  
     public Product addProduct(String name,
-                              Double price,
-                              String description,
-                              MultipartFile image) throws Exception {
+                          Double price,
+                          String description,
+                          MultipartFile image) throws Exception {
 
-        String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
+    // 🔥 Upload image to Cloudinary
+    Map uploadResult = cloudinary.uploader().upload(
+            image.getBytes(),
+            ObjectUtils.emptyMap()
+    );
 
-        Path filePath = Paths.get(UPLOAD_DIR + fileName);
-        Files.createDirectories(filePath.getParent());
-        Files.write(filePath, image.getBytes());
+    String imageUrl = uploadResult.get("secure_url").toString();
 
-        Product product = new Product();
-        product.setName(name);
-        product.setPrice(price);
-        product.setDescription(description);
-        product.setImageName(fileName);
+    // 🔥 Save product with Cloudinary URL
+    Product product = new Product();
+    product.setName(name);
+    product.setPrice(price);
+    product.setDescription(description);
+    product.setImageUrl(imageUrl);   // IMPORTANT CHANGE
 
-        return repo.save(product);
-    }
+    return repo.save(product);
+}
 
   
     public List<Product> getAllProducts() {
@@ -51,4 +60,5 @@ public class  ProductService {
         repo.deleteById(id);
     }
 }
+
 
