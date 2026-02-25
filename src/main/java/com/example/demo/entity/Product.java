@@ -13,40 +13,48 @@ public class Product {
     private Double price;
     private String description;
 
-	@Column(name = "image_name")
-private String imageUrl;
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Double getPrice() {
-		return price;
-	}
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public String getImageName() {
-		return imageName;
-	}
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
+    @Column(name = "image_name")   // keeps old DB column
+    private String imageUrl;
 
-    
+    // ===== Getters & Setters =====
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImageUrl() {   // ✅ Correct getter
+        return imageUrl;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImageUrl(String imageUrl) {   // ✅ Correct setter
+        this.imageUrl = imageUrl;
+    }
 }
-
