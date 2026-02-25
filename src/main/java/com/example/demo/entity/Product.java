@@ -12,7 +12,10 @@ public class Product {
     private String name;
     private Double price;
     private String description;
-    private String imageName;
+
+	@Column(name = "image_name")
+private String imageUrl;
+	
 	public Long getId() {
 		return id;
 	}
@@ -46,3 +49,4 @@ public class Product {
 
     
 }
+
